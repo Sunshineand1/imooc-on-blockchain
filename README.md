@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+1.truffle相当于create-react-app或者vue-cli
+2.一开始用没问题 但想要进阶 还是需要自己配置一下webpack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1.使用js测试合约 测试驱动开发
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+一、编译智能合约
+solc包
+solc.compile('智能合约文件')
+solc 编译.solw文件 生成json 
+   生成的文件 bytecode  部署合约用的数据
+             interface(abi) 接口声明 测试使用
+ 二、自动化编译
+1.每次compile清空文件 重新生成
+ rimraf包 清空文件的   执行 rimraf src/compiled/* && node scripts/compile.js
+"compile":"rimraf src/compiled/* && node scripts/compile.js"
+2.报错信息打印
+3.最好能监听 自动compile
+onchange 包 监听文件变化的  执行 onchange 'contract/*.sol' -- npm run compile
+"compile:w":"onchange 'contract/*.sol' -- npm run compile"
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+三、课程
 
-### `npm test`
+课程列表
+   1.每个课程 都是一个单独的合约
+   2.使用CouseList来控制课程的合约（合约之间可以交互  合约是有地址的）
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+课程
+  owner 
+  name
+  content
+  target 课程目标是募集 多少ETH
+  fundingPrice 众筹价格 8
+  price 上线价格 2
+  img 课程头图
+  video 视频
+  count 多少人支持
+  isOnline 是否上线
 
-### `npm run build`
+  users{
+   用户1:1块钱
+   用户2：花了2块钱
+  }
+  payable 可付款的
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  1.如果收到的钱大于目标 上线了
+  2.上线前的钱 ceo不分
+  3.上线之后卖的钱 ceo分1成
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  wei finney szabo ether
+  1 ether = 10^3 finnery
+  1 ether = 10^6 szabo
+  1 ether = 10^18 wei
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  
+测试使用：mocha
+断言使用node自己的assert
+本地部署环境 ganache 测试的时候开虚拟环境
+bignumber.js包  计算费用太大了 
+truffle-hdwallet-provider
+web3@1.0.0-beta.34 truffle-hdwallet-provider@0.0.3
+拓展
+vscode 安装solidity  可以看sol文件不同语法部分显示不同颜色
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+部署
+ 
+  主网
+  本地genache 没有办法在公网访问
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  测试网（ropsten）与主网一样的逻辑 只不过币不值钱
+  infura.io 部署服务
+https://sepolia.infura.io/v3/4336eaa8bff54fabb81cf2ce5d4346ad
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ 钱包的网切换到测试网  然后充测试币
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+drill rocket nurse story comfort tobacco tide solid miracle veteran pink shove
