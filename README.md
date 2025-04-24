@@ -78,3 +78,10 @@ https://sepolia.infura.io/v3/4336eaa8bff54fabb81cf2ce5d4346ad
  钱包的网切换到测试网  然后充测试币
 
 drill rocket nurse story comfort tobacco tide solid miracle veteran pink shove
+
+合约部署地址持久化
+
+配置环境
+npm install react-app-rewired --save
+
+npm install babel-plugin-import --save
